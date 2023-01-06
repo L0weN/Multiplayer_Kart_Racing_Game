@@ -218,6 +218,11 @@ PrefabInstance:
     - {fileID: 8296172668432054357, guid: 9c0ae15ff43a6b94eae3d8d8f9098e41, type: 3}
     - {fileID: 8425293429085705888, guid: 9c0ae15ff43a6b94eae3d8d8f9098e41, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9c0ae15ff43a6b94eae3d8d8f9098e41, type: 3}
+--- !u!4 &232317872 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400002, guid: 474a73983359bfd43b76a7f702d41a6b, type: 3}
+  m_PrefabInstance: {fileID: 1573965148}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &436145131
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,7 +289,7 @@ GameObject:
   - component: {fileID: 690102708}
   - component: {fileID: 690102709}
   m_Layer: 0
-  m_Name: CarParent
+  m_Name: RedJeep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -331,6 +336,7 @@ MonoBehaviour:
   - {fileID: 656454573}
   torque: 200
   maxSteerAngle: 30
+  maxBrakeTorque: 2000
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -634,6 +640,67 @@ WheelCollider:
   m_CorrespondingSourceObject: {fileID: 8425293429085705888, guid: 9c0ae15ff43a6b94eae3d8d8f9098e41, type: 3}
   m_PrefabInstance: {fileID: 2066241999}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1573965148
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2060322443}
+    m_Modifications:
+    - target: {fileID: 100002, guid: 474a73983359bfd43b76a7f702d41a6b, type: 3}
+      propertyPath: m_Name
+      value: biker
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 474a73983359bfd43b76a7f702d41a6b, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 474a73983359bfd43b76a7f702d41a6b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.4347826
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 474a73983359bfd43b76a7f702d41a6b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.027
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 474a73983359bfd43b76a7f702d41a6b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.978
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 474a73983359bfd43b76a7f702d41a6b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.087
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 474a73983359bfd43b76a7f702d41a6b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 474a73983359bfd43b76a7f702d41a6b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 474a73983359bfd43b76a7f702d41a6b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 474a73983359bfd43b76a7f702d41a6b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 474a73983359bfd43b76a7f702d41a6b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 474a73983359bfd43b76a7f702d41a6b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 474a73983359bfd43b76a7f702d41a6b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 474a73983359bfd43b76a7f702d41a6b, type: 3}
 --- !u!1001 &1660142396
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -728,6 +795,10 @@ PrefabInstance:
     - target: {fileID: 8425293429085705888, guid: 9c0ae15ff43a6b94eae3d8d8f9098e41, type: 3}
       propertyPath: m_SuspensionDistance
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8425293429085705888, guid: 9c0ae15ff43a6b94eae3d8d8f9098e41, type: 3}
+      propertyPath: m_ForwardFriction.m_Stiffness
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8296172668432054357, guid: 9c0ae15ff43a6b94eae3d8d8f9098e41, type: 3}
@@ -923,6 +994,10 @@ PrefabInstance:
     - target: {fileID: 8425293429085705888, guid: 9c0ae15ff43a6b94eae3d8d8f9098e41, type: 3}
       propertyPath: m_SuspensionDistance
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8425293429085705888, guid: 9c0ae15ff43a6b94eae3d8d8f9098e41, type: 3}
+      propertyPath: m_ForwardFriction.m_Stiffness
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8296172668432054357, guid: 9c0ae15ff43a6b94eae3d8d8f9098e41, type: 3}
@@ -1274,6 +1349,7 @@ Transform:
   m_Children:
   - {fileID: 1875079313}
   - {fileID: 8515584224987554599}
+  - {fileID: 232317872}
   m_Father: {fileID: 690102708}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1387,6 +1463,10 @@ PrefabInstance:
     - target: {fileID: 8425293429085705888, guid: 9c0ae15ff43a6b94eae3d8d8f9098e41, type: 3}
       propertyPath: m_SuspensionDistance
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8425293429085705888, guid: 9c0ae15ff43a6b94eae3d8d8f9098e41, type: 3}
+      propertyPath: m_ForwardFriction.m_Stiffness
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8296172668432054357, guid: 9c0ae15ff43a6b94eae3d8d8f9098e41, type: 3}
@@ -1870,6 +1950,10 @@ PrefabInstance:
     - target: {fileID: 8425293429085705888, guid: 9c0ae15ff43a6b94eae3d8d8f9098e41, type: 3}
       propertyPath: m_SuspensionDistance
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8425293429085705888, guid: 9c0ae15ff43a6b94eae3d8d8f9098e41, type: 3}
+      propertyPath: m_ForwardFriction.m_Stiffness
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8296172668432054357, guid: 9c0ae15ff43a6b94eae3d8d8f9098e41, type: 3}
