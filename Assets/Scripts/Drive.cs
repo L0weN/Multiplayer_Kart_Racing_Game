@@ -15,6 +15,11 @@ public class Drive : MonoBehaviour
     Transform[] skidTrails = new Transform[4];
 
     public AudioSource skidSound;
+    
+    public ParticleSystem smokePrefab;
+    ParticleSystem[] skidSmoke = new ParticleSystem[4];
+
+    public GameObject brakeLight;
 
     public void StartSkidTrail(int i) 
     {
@@ -45,6 +50,15 @@ public class Drive : MonoBehaviour
         accel = Mathf.Clamp(accel, -1, 1);
         steer = Mathf.Clamp(steer, -1, 1) * maxSteerAngle;
         brake = Mathf.Clamp(brake, 0, 1) * maxBrakeTorque;
+
+        if (brake != 0)
+        {
+            brakeLight.SetActive(true);
+        }
+        else
+        {
+            brakeLight.SetActive(false);
+        }
 
         float thrustTorque = accel * torque;
         
@@ -82,6 +96,8 @@ public class Drive : MonoBehaviour
                     skidSound.Play();
                 }
                 //StartSkidTrail(i);
+                skidSmoke[i].transform.position = WC[i].transform.position - WC[i].transform.up * WC[i].radius;
+                skidSmoke[i].Emit(1);
             }
             else
             {
@@ -92,7 +108,18 @@ public class Drive : MonoBehaviour
         if (numSkidding == 0 && skidSound.isPlaying)
             skidSound.Stop();
     }
-    
+
+    void Start()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            skidSmoke[i] = Instantiate(smokePrefab);
+            skidSmoke[i].Stop();
+        }
+
+        brakeLight.SetActive(false);
+    }
+
     void Update()
     {
         float a = Input.GetAxis("Vertical");
