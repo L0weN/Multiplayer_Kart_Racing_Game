@@ -438,7 +438,7 @@ Transform:
   m_GameObject: {fileID: 1865521164}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 1, z: 10}
+  m_LocalScale: {x: 10, y: 1, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -455,10 +455,50 @@ PrefabInstance:
       propertyPath: skidmarksController
       value: 
       objectReference: {fileID: 1767476886}
-    - target: {fileID: 2589968390168107872, guid: 4c0c623ce9ca7914c90c7533ce1c6943, type: 3}
-      propertyPath: smokePrefab
-      value: 
-      objectReference: {fileID: 8841791695926604674, guid: 350aea30c383e44408364041c69b5447, type: 3}
+    - target: {fileID: 1295161806353586080, guid: 4c0c623ce9ca7914c90c7533ce1c6943, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295161806353586080, guid: 4c0c623ce9ca7914c90c7533ce1c6943, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295161806353586080, guid: 4c0c623ce9ca7914c90c7533ce1c6943, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295161806353586080, guid: 4c0c623ce9ca7914c90c7533ce1c6943, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295161806353586080, guid: 4c0c623ce9ca7914c90c7533ce1c6943, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295161806353586080, guid: 4c0c623ce9ca7914c90c7533ce1c6943, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295161806451326064, guid: 4c0c623ce9ca7914c90c7533ce1c6943, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295161806451326064, guid: 4c0c623ce9ca7914c90c7533ce1c6943, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295161806451326064, guid: 4c0c623ce9ca7914c90c7533ce1c6943, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295161806451326064, guid: 4c0c623ce9ca7914c90c7533ce1c6943, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295161806451326064, guid: 4c0c623ce9ca7914c90c7533ce1c6943, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2589968390168107873, guid: 4c0c623ce9ca7914c90c7533ce1c6943, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -507,10 +547,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: PurpleJeep
       objectReference: {fileID: 0}
+    - target: {fileID: 2742988440084847369, guid: 4c0c623ce9ca7914c90c7533ce1c6943, type: 3}
+      propertyPath: MaxDistance
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 2742988440084847369, guid: 4c0c623ce9ca7914c90c7533ce1c6943, type: 3}
+      propertyPath: MinDistance
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2742988440084847369, guid: 4c0c623ce9ca7914c90c7533ce1c6943, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6503847346619576704, guid: 4c0c623ce9ca7914c90c7533ce1c6943, type: 3}
       propertyPath: skidmarksController
       value: 
       objectReference: {fileID: 1767476886}
+    - target: {fileID: 7389244022318133394, guid: 4c0c623ce9ca7914c90c7533ce1c6943, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8754635450057260152, guid: 4c0c623ce9ca7914c90c7533ce1c6943, type: 3}
       propertyPath: skidmarksController
       value: 

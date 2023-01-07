@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Drive : MonoBehaviour
@@ -11,22 +10,33 @@ public class Drive : MonoBehaviour
     public float maxSteerAngle = 30;
     public float maxBrakeTorque = 500;
 
-    public Transform skidTrailPrefab;
+    public AudioSource skidSound;
+    public AudioSource highAccel;
+
+    public Transform SkidTrailPrefab;
     Transform[] skidTrails = new Transform[4];
 
-    public AudioSource skidSound;
-    
     public ParticleSystem smokePrefab;
     ParticleSystem[] skidSmoke = new ParticleSystem[4];
 
     public GameObject brakeLight;
 
-    public void StartSkidTrail(int i) 
+    public Rigidbody rb;
+    public float gearLength = 3;
+    public float currentSpeed { get { return rb.velocity.magnitude * gearLength; } }
+    public float lowPitch = 1f;
+    public float highPitch = 6f;
+    public int numGears = 5;
+    float rpm;
+    int currentGear = 1;
+    float currentGearPerc;
+    public float maxSpeed = 200;
+
+    public void StartSkidTrail(int i)
     {
         if (skidTrails[i] == null)
-        {
-            skidTrails[i] = Instantiate(skidTrailPrefab);
-        }
+            skidTrails[i] = Instantiate(SkidTrailPrefab);
+
         skidTrails[i].parent = WC[i].transform;
         skidTrails[i].localRotation = Quaternion.Euler(90, 0, 0);
         skidTrails[i].localPosition = -Vector3.up * WC[i].radius;
@@ -34,15 +44,39 @@ public class Drive : MonoBehaviour
 
     public void EndSkidTrail(int i)
     {
-        if (skidTrails[i] == null)
-        {
-            return;
-        }
+        if (skidTrails[i] == null) return;
         Transform holder = skidTrails[i];
         skidTrails[i] = null;
         holder.parent = null;
-        holder.localRotation = Quaternion.Euler(90, 0, 0);
+        holder.rotation = Quaternion.Euler(90, 0, 0);
         Destroy(holder.gameObject, 30);
+    }
+    
+    
+
+    void CalculateEngineSound()
+    {
+        float gearPercentage = (1 / (float)numGears);
+        float targetGearFactor = Mathf.InverseLerp(gearPercentage * currentGear, gearPercentage * (currentGear + 1),
+                                                    Mathf.Abs(currentSpeed / maxSpeed));
+        currentGearPerc = Mathf.Lerp(currentGearPerc, targetGearFactor, Time.deltaTime * 5f);
+
+        var gearNumFactor = currentGear / (float)numGears;
+        rpm = Mathf.Lerp(gearNumFactor, 1, currentGearPerc);
+
+        float speedPercentage = Mathf.Abs(currentSpeed / maxSpeed);
+        float upperGearMax = (1 / (float)numGears) * (currentGear + 1);
+        float downGearMax = (1 / (float)numGears) * currentGear;
+
+        if (currentGear > 0 && speedPercentage < downGearMax)
+            currentGear--;
+
+        if (speedPercentage > upperGearMax && (currentGear < (numGears - 1)))
+            currentGear++;
+
+        float pitch = Mathf.Lerp(lowPitch, highPitch, rpm);
+        highAccel.pitch = Mathf.Min(highPitch, pitch) * 0.25f;
+
     }
 
     void Go(float accel, float steer, float brake)
@@ -52,16 +86,14 @@ public class Drive : MonoBehaviour
         brake = Mathf.Clamp(brake, 0, 1) * maxBrakeTorque;
 
         if (brake != 0)
-        {
             brakeLight.SetActive(true);
-        }
         else
-        {
             brakeLight.SetActive(false);
-        }
 
-        float thrustTorque = accel * torque;
-        
+        float thrustTorque = 0;
+        if (currentSpeed < maxSpeed)
+            thrustTorque = accel * torque;
+
         for (int i = 0; i < 4; i++)
         {
             WC[i].motorTorque = thrustTorque;
@@ -70,15 +102,15 @@ public class Drive : MonoBehaviour
                 WC[i].steerAngle = steer;
             else
                 WC[i].brakeTorque = brake;
+
             Quaternion quat;
             Vector3 position;
-
             WC[i].GetWorldPose(out position, out quat);
-
             Wheels[i].transform.position = position;
-            Wheels[i].transform.rotation = quat;
+            Wheels[i].transform.localRotation = quat;
         }
     }
+
 
     void CheckForSkid()
     {
@@ -88,7 +120,7 @@ public class Drive : MonoBehaviour
             WheelHit wheelHit;
             WC[i].GetGroundHit(out wheelHit);
 
-            if (Mathf.Abs(wheelHit.forwardSlip) >= 0.5f || Mathf.Abs(wheelHit.sidewaysSlip) >= 0.5f)
+            if (Mathf.Abs(wheelHit.forwardSlip) >= 0.4f || Mathf.Abs(wheelHit.sidewaysSlip) >= 0.4f)
             {
                 numSkidding++;
                 if (!skidSound.isPlaying)
@@ -106,7 +138,9 @@ public class Drive : MonoBehaviour
         }
 
         if (numSkidding == 0 && skidSound.isPlaying)
+        {
             skidSound.Stop();
+        }
     }
 
     void Start()
@@ -116,10 +150,8 @@ public class Drive : MonoBehaviour
             skidSmoke[i] = Instantiate(smokePrefab);
             skidSmoke[i].Stop();
         }
-
         brakeLight.SetActive(false);
     }
-
     void Update()
     {
         float a = Input.GetAxis("Vertical");
@@ -129,5 +161,7 @@ public class Drive : MonoBehaviour
         Go(a, s, b);
 
         CheckForSkid();
+        CalculateEngineSound();
     }
 }
+
